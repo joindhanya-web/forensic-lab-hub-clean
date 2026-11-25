@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore forensic science disciplines, case studies and an interactive quiz.">
+  <title>Forensic Lab Hub | Explore · Examine · Understand</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="#home">FORENSIC <span>LAB HUB</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#disciplines">Disciplines</a>
+      <a href="#cases">Case studies</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">EXPLORE · EXAMINE · UNDERSTAND</p>
+        <h1>Every trace<br><span>tells a story.</span></h1>
+        <p>Discover how science helps investigators examine evidence, reconstruct events and move closer to the truth. A beginner-friendly introduction to the world of forensic science.</p>
+        <a class="button" href="#disciplines">Explore forensic science <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="evidence-card">
+          <span>CASE / 001</span>
+          <strong>TRACE<br>EVIDENCE</strong>
+          <i>F · L · H</i>
+        </div>
+        <b class="spark spark-one">✳</b>
+        <b class="spark spark-two">✦</b>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <p class="section-label">01 / THE SCIENCE</p>
+      <h2>Where curiosity meets evidence.</h2>
+      <p class="intro">Forensic science applies scientific methods to questions that arise during investigations. It brings together observation, careful documentation and specialised laboratory analysis.</p>
+      <div class="fact-strip">
+        <div><strong>Observe</strong><span>Notice and document details.</span></div>
+        <div><strong>Examine</strong><span>Study evidence systematically.</span></div>
+        <div><strong>Interpret</strong><span>Understand findings with care.</span></div>
+      </div>
+    </section>
+
+    <section class="section tinted" id="disciplines">
+      <p class="section-label">02 / EXPLORE THE FIELDS</p>
+      <h2>Forensic disciplines</h2>
+      <p class="intro">Explore some of the scientific fields that help examine different kinds of evidence.</p>
+      <div class="card-grid" id="discipline-grid">
+        <p class="loading">Loading disciplines...</p>
+      </div>
+    </section>
+
+    <section class="section" id="cases">
+      <p class="section-label">03 / THINK LIKE AN INVESTIGATOR</p>
+      <h2>Case studies</h2>
+      <p class="intro">Short fictional learning scenarios that show how forensic disciplines may be applied.</p>
+      <div class="case-list" id="case-list">
+        <p class="loading">Loading case studies...</p>
+      </div>
+    </section>
+
+    <section class="section tinted" id="quiz">
+      <p class="section-label">04 / TEST YOUR KNOWLEDGE</p>
+      <h2>Quick knowledge check</h2>
+      <p class="intro">Answer the questions and submit your responses to see your score.</p>
+      <form class="quiz-panel" id="quiz-form">
+        <div class="quiz-top"><span>FORENSIC BASICS</span><span id="quiz-progress">Loading...</span></div>
+        <div id="quiz-questions"><p class="loading">Loading quiz...</p></div>
+        <button class="button" type="submit">Submit answers</button>
+        <p class="quiz-result" id="quiz-result" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo footer-logo" href="#home">FORENSIC <span>LAB HUB</span></a>
+    <p>A beginner-friendly learning project about forensic science.</p>
+    <small>Educational content only · Fictional case studies</small>
+  </footer>
+</body>
+</html>
