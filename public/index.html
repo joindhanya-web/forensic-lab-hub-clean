@@ -3,144 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forensic Lab Hub</title>
+<title>Forensic Lab Hub | Explore the Evidence</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#0b1120;color:#e8edf7}
-header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263246;background:#0e1729}
-.logo{font-size:22px;font-weight:bold;color:#62e6c5}
-nav a{color:#cbd5e1;text-decoration:none;margin-left:20px;font-size:14px}
-.hero{padding:80px 7%;background:linear-gradient(120deg,#111c30,#152b3b)}
-.hero small{color:#62e6c5;letter-spacing:3px}
-.hero h1{font-size:48px;margin:18px 0}
-.hero p{color:#aab7cc;max-width:600px;line-height:1.7}
-.btn{display:inline-block;background:#62e6c5;color:#07121b;padding:13px 20px;border:0;border-radius:7px;font-weight:bold;text-decoration:none;cursor:pointer;margin-top:22px}
-section{padding:55px 7%}
-h2{font-size:28px;margin-bottom:12px}
-.sub{color:#9cabc2;margin-bottom:25px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card{background:#141e30;border:1px solid #27364b;border-radius:12px;padding:22px}
-.card h3{color:#62e6c5;margin-bottom:12px}
-.card p{color:#aab7cc;line-height:1.6;font-size:14px}
-.tag{font-size:12px;color:#62e6c5;margin-bottom:12px;display:block}
-#cases .card{border-left:3px solid #62e6c5}
-.quizbox{background:#141e30;border:1px solid #27364b;border-radius:12px;padding:25px}
-.question{margin:20px 0;padding-bottom:18px;border-bottom:1px solid #27364b}
-.question p{margin-bottom:12px;font-weight:bold}
-.question label{display:block;padding:9px;color:#b8c5d8;cursor:pointer}
-.question input{margin-right:8px}
-#result{margin-top:20px;color:#62e6c5;font-weight:bold;font-size:18px}
-footer{text-align:center;padding:30px;border-top:1px solid #263246;color:#8090a8}
-input[type=text]{padding:12px;border-radius:7px;border:1px solid #33445b;background:#0b1120;color:white;width:100%;max-width:450px;margin:15px 0}
-@media(max-width:600px){.hero h1{font-size:34px}nav a{margin-left:8px;font-size:12px}header{padding:18px 4%}}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root{
+--bg:#080d19;--panel:#10192b;--panel2:#141f34;
+--blue:#6d8cff;--cyan:#54e5df;--purple:#a78bfa;
+--text:#f1f5ff;--muted:#a2b0c8;--border:#25334b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;line-height:1.7}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,90%);margin:auto}
+header{position:sticky;top:0;z-index:99;background:#080d19ee;backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav{height:76px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:"Space Grotesk";font-size:20px;font-weight:800}
+.logo span{color:var(--cyan)}
+nav{display:flex;gap:26px}
+nav a{font-size:13px;color:var(--muted);font-weight:600}
+nav a:hover{color:var(--cyan)}
+.hero{min-height:610px;display:flex;align-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero:before{content:"";position:absolute;width:520px;height:520px;right:-80px;top:30px;background:radial-gradient(circle,#526fff35,transparent 68%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:50px;padding:80px 0}
+.eyebrow{font-size:11px;letter-spacing:3px;color:var(--cyan);font-weight:800}
+h1{font-family:"Space Grotesk";font-size:clamp(46px,6.4vw,82px);line-height:1.08;letter-spacing:-3px;margin:20px 0}
+h1 span{background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple));background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:620px;font-size:16px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;padding:13px 21px;border-radius:9px;background:var(--blue);color:white;font-weight:700;font-size:14px;transition:.25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 30px #6d8cff40}
+.btn.outline{border:1px solid var(--border);background:transparent}
+.art{height:370px;display:grid;place-items:center;position:relative}
+.orbit{position:absolute;border:1px solid #6d8cff55;border-radius:50%;width:330px;height:330px}
+.orbit.two{width:250px;height:250px;border-style:dashed;border-color:#54e5df55}
+.orbit.three{width:170px;height:170px;border-color:#a78bfa66}
+.core{width:130px;height:130px;border-radius:28px;background:linear-gradient(145deg,#182b48,#11182a);border:1px solid #54e5df80;display:grid;place-items:center;font-size:62px;box-shadow:0 0 60px #54e5df18}
+.float{position:absolute;background:var(--panel2);border:1px solid var(--border);padding:13px 17px;border-radius:12px;font-size:13px;box-shadow:0 15px 45px #0005}
+.float b{display:block;color:var(--cyan);font-size:12px}
+.f1{top:25px;left:0}.f2{right:0;bottom:45px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:15px;background:var(--panel);margin-top:-1px}
+.stat{padding:25px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border:0}
+.stat strong{display:block;font-size:27px;color:var(--cyan);font-family:"Space Grotesk"}
+.stat span{font-size:12px;color:var(--muted)}
+section{padding:90px 0}
+.section-head{margin-bottom:35px;max-width:750px}
+.section-head h2{font-family:"Space Grotesk";font-size:clamp(30px,4vw,45px);letter-spacing:-1px;margin:10px 0}
+.section-head p{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:linear-gradient(150deg,var(--panel),#0c1423);border:1px solid var(--border);border-radius:16px;padding:26px;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:#6d8cff88}
+.card-icon{width:54px;height:54px;border-radius:13px;background:#6d8cff15;border:1px solid #6d8cff40;display:grid;place-items:center;font-size:27px;margin-bottom:19px}
+.card h3{font-size:18px;margin-bottom:9px}
+.card p{font-size:13px;color:var(--muted)}
+.card small{display:block;color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:1.5px;margin-bottom:10px}
+.about{background:#0c1423;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.about-box{background:linear-gradient(145deg,#14213b,#0d1422);border:1px solid var(--border);border-radius:18px;padding:30px}
+.about-box h3{font-size:22px;margin-bottom:14px}
+.about-box p{color:var(--muted);font-size:14px}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.pill{padding:7px 12px;border:1px solid var(--border);border-radius:30px;color:var(--cyan);font-size:11px}
+.case-card{position:relative}
+.case-card .number{font-family:"Space Grotesk";font-size:38px;color:#6d8cff55;font-weight:800}
+.case-card h3{margin:5px 0 12px}
+.case-card .tag{color:var(--cyan);font-size:10px;letter-spacing:1.5px;font-weight:800}
+.case-card details{margin-top:18px;border-top:1px solid var(--border);padding-top:12px}
+.case-card summary{cursor:pointer;color:var(--cyan);font-size:12px;font-weight:700}
+.case-card details p{margin-top:12px}
+.learning{background:#0c1423;border-block:1px solid var(--border)}
+.learning-list{display:grid;gap:14px}
+.learning-item{display:flex;gap:18px;padding:20px;background:var(--panel);border:1px solid var(--border);border-radius:12px}
+.learning-item .emoji{font-size:26px}
+.learning-item p{color:var(--muted);font-size:13px}
+.quiz{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:30px}
+.question{padding:23px 0;border-bottom:1px solid var(--border)}
+.question h3{font-size:16px;margin-bottom:12px}
+.question label{display:block;padding:10px 12px;margin:5px 0;border:1px solid transparent;border-radius:8px;color:var(--muted);cursor:pointer;font-size:14px}
+.question label:hover{background:#18243a;border-color:var(--border)}
+.question input{accent-color:var(--cyan);margin-right:10px}
+.result{padding:22px;margin-top:18px;border-radius:12px;background:#54e5df10;color:var(--cyan);font-weight:700;display:none}
+footer{padding:40px 0;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:12px}
+footer .logo{margin-bottom:10px}
+footer strong{color:var(--cyan)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.art{height:320px}.cards{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border)}}
+@media(max-width:600px){.nav{height:auto;min-height:70px;align-items:flex-start;flex-direction:column;padding:16px 0}.hero-grid{padding:60px 0}.hero{min-height:0}h1{letter-spacing:-1.5px;font-size:46px}nav{gap:13px;flex-wrap:wrap}nav a{font-size:11px}.art{transform:scale(.85);margin:-15px 0}.cards{grid-template-columns:1fr}.stats{margin-top:0}.stat{padding:18px 8px}.stat strong{font-size:22px}section{padding:60px 0}.quiz{padding:18px}.about-box{padding:22px}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">🔬 Forensic Lab Hub</div>
-  <nav>
-    <a href="#disciplines">Labs</a>
-    <a href="#cases">Cases</a>
-    <a href="#quiz">Assessment</a>
-  </nav>
+<div class="container nav">
+<a class="logo" href="#">🔬 Forensic<span>Lab</span>Hub</a>
+<nav>
+<a href="#about">About</a>
+<a href="#lab">Laboratories</a>
+<a href="#cases">Case Files</a>
+<a href="#learning">Learning</a>
+<a href="#assessment">Assessment</a>
+</nav>
+</div>
 </header>
 
+<main>
 <div class="hero">
-  <small>LEARN • ANALYZE • INVESTIGATE</small>
-  <h1>Explore the Science<br>Behind Every Evidence.</h1>
-  <p>An interactive forensic science learning platform. Explore forensic disciplines, understand crime scene evidence and test your investigative knowledge.</p>
-  <a class="btn" href="#disciplines">Explore the Lab →</a>
+<div class="container hero-grid">
+<div>
+<div class="eyebrow">SCIENCE · EVIDENCE · DISCOVERY</div>
+<h1>Every clue tells a story.<br><span>Discover the science.</span></h1>
+<p>Enter the world of forensic science. Explore laboratory disciplines, understand evidence, investigate case scenarios and challenge your knowledge.</p>
+<div class="actions">
+<a class="btn" href="#lab">Explore Laboratories ↗</a>
+<a class="btn outline" href="#assessment">Take Assessment</a>
+</div>
+</div>
+<div class="art">
+<div class="orbit"></div><div class="orbit two"></div><div class="orbit three"></div>
+<div class="core">🧬</div>
+<div class="float f1"><b>FORENSIC SCIENCE</b>Evidence & Analysis</div>
+<div class="float f2"><b>LAB MODULES</b>Explore · Learn · Test</div>
+</div>
+</div>
 </div>
 
-<section id="disciplines">
-  <h2>Forensic Disciplines</h2>
-  <p class="sub">Explore the different branches of forensic science.</p>
-  <div class="grid" id="disciplineGrid">
-    <div class="card"><span class="tag">01 • EVIDENCE</span><h3>Fingerprint Analysis</h3><p>Study fingerprint patterns, ridge characteristics and identification techniques.</p></div>
-    <div class="card"><span class="tag">02 • BIOLOGY</span><h3>Forensic DNA</h3><p>Learn how biological samples and DNA profiling help investigations.</p></div>
-    <div class="card"><span class="tag">03 • TOXICOLOGY</span><h3>Toxicology</h3><p>Understand the detection of drugs, chemicals and toxins in biological samples.</p></div>
-    <div class="card"><span class="tag">04 • DIGITAL</span><h3>Digital Forensics</h3><p>Explore digital evidence from computers, mobile devices and networks.</p></div>
-    <div class="card"><span class="tag">05 • DOCUMENTS</span><h3>Questioned Documents</h3><p>Examine handwriting, signatures, ink and document authenticity.</p></div>
-    <div class="card"><span class="tag">06 • CRIME SCENE</span><h3>Crime Scene Investigation</h3><p>Learn evidence collection, preservation, documentation and scene analysis.</p></div>
-  </div>
+<div class="container stats">
+<div class="stat"><strong>08</strong><span>Science Disciplines</span></div>
+<div class="stat"><strong>03</strong><span>Case Studies</span></div>
+<div class="stat"><strong>05</strong><span>Assessment Questions</span></div>
+<div class="stat"><strong>100%</strong><span>Curiosity Required</span></div>
+</div>
+
+<section id="about">
+<div class="container about-grid">
+<div class="section-head">
+<div class="eyebrow">ABOUT THE PROJECT</div>
+<h2>Science meets investigation.</h2>
+<p>Forensic science applies scientific methods to the examination of evidence. It supports investigations by helping experts analyze materials, reconstruct events and present reliable findings.</p>
+<p style="margin-top:15px">This learning hub introduces key forensic fields and explains how laboratory methods contribute to the investigative process.</p>
+</div>
+<div class="about-box">
+<h3>What happens in a forensic lab?</h3>
+<p>Evidence is carefully documented, collected, preserved, examined and interpreted. Every step matters—from protecting samples against contamination to maintaining a clear record of evidence handling.</p>
+<div class="pills"><span class="pill">Evidence Integrity</span><span class="pill">Scientific Method</span><span class="pill">Analysis</span><span class="pill">Documentation</span></div>
+</div>
+</div>
 </section>
 
-<section id="cases">
-  <h2>Case Study Corner</h2>
-  <p class="sub">Think critically. Examine the evidence. Reach a conclusion.</p>
-  <div class="grid">
-    <div class="card"><span class="tag">CASE 001</span><h3>The Broken Window</h3><p>A burglary scene has a broken window and partial fingerprints on the glass. Investigators must evaluate the prints and the scene carefully before drawing conclusions.</p></div>
-    <div class="card"><span class="tag">CASE 002</span><h3>Unknown Substance</h3><p>A suspicious powder is recovered. The forensic team must document, secure and submit the sample for laboratory examination.</p></div>
-    <div class="card"><span class="tag">CASE 003</span><h3>Digital Trail</h3><p>A device is recovered during an investigation. Digital forensic procedures are used to preserve and examine potential evidence.</p></div>
-  </div>
+<section id="lab">
+<div class="container">
+<div class="section-head">
+<div class="eyebrow">LABORATORY DIRECTORY</div>
+<h2>Explore forensic disciplines.</h2>
+<p>Discover how specialists examine different types of evidence and contribute to investigations.</p>
+</div>
+<div class="cards">
+<div class="card"><div class="card-icon">🖐️</div><small>01 / IDENTIFICATION</small><h3>Fingerprint Analysis</h3><p>Explore ridge patterns, loops, whorls, arches and the comparison of fingerprint impressions.</p></div>
+<div class="card"><div class="card-icon">🧬</div><small>02 / BIOLOGY</small><h3>DNA Forensics</h3><p>Learn how genetic material from biological samples can support identification and comparison.</p></div>
+<div class="card"><div class="card-icon">🧪</div><small>03 / CHEMISTRY</small><h3>Forensic Toxicology</h3><p>Understand the examination of biological specimens for drugs, chemicals and toxic substances.</p></div>
+<div class="card"><div class="card-icon">🔎</div><small>04 / PHYSICAL EVIDENCE</small><h3>Trace Evidence</h3><p>Examine small materials such as fibers, glass fragments, paint and other transferred evidence.</p></div>
+<div class="card"><div class="card-icon">💻</div><small>05 / TECHNOLOGY</small><h3>Digital Forensics</h3><p>Discover the preservation and examination of data from phones, computers and storage devices.</p></div>
+<div class="card"><div class="card-icon">📄</div><small>06 / DOCUMENTS</small><h3>Document Examination</h3><p>Explore handwriting, signature comparison, document alteration and authenticity questions.</p></div>
+<div class="card"><div class="card-icon">🔬</div><small>07 / FIREARMS</small><h3>Forensic Ballistics</h3><p>Learn about firearm-related evidence, ammunition components and examination principles.</p></div>
+<div class="card"><div class="card-icon">🦴</div><small>08 / HUMAN REMAINS</small><h3>Forensic Anthropology</h3><p>Understand how skeletal remains can be examined to support identification and investigations.</p></div>
+<div class="card"><div class="card-icon">📸</div><small>09 / SCENE RECORDS</small><h3>Crime Scene Photography</h3><p>Learn why photographs, scales, scene documentation and visual records are important.</p></div>
+</div>
+</div>
 </section>
 
-<section id="quiz">
-  <h2>Knowledge Assessment</h2>
-  <p class="sub">Answer all questions and check your score.</p>
-  <div class="quizbox">
-    <div id="quizQuestions"></div>
-    <button class="btn" onclick="checkQuiz()">Submit Assessment</button>
-    <div id="result"></div>
-  </div>
+<section class="about" id="cases">
+<div class="container">
+<div class="section-head">
+<div class="eyebrow">INVESTIGATION SIMULATIONS</div>
+<h2>Case files.</h2>
+<p>Read the scenario, consider the evidence and explore a responsible investigative approach.</p>
+</div>
+<div class="cards">
+<div class="card case-card"><div class="number">01</div><div class="tag">BURGLARY · TRACE EVIDENCE</div><h3>The Broken Window</h3><p>A property is found disturbed. A broken window and partial impressions are documented during the initial examination.</p><details><summary>Explore investigation approach</summary><p>Secure the scene, photograph the window and surrounding area, record observations, protect potential trace evidence and maintain documentation. An impression alone should not be treated as proof of identity.</p></details></div>
+<div class="card case-card"><div class="number">02</div><div class="tag">LABORATORY · CHEMISTRY</div><h3>The Unknown Substance</h3><p>A sealed container holding an unknown substance is submitted to the laboratory for examination.</p><details><summary>Explore investigation approach</summary><p>Check packaging and labels, document the condition of the sample, follow laboratory safety procedures and use validated analytical methods. Conclusions should be based on test results.</p></details></div>
+<div class="card case-card"><div class="number">03</div><div class="tag">DIGITAL · DEVICE ANALYSIS</div><h3>The Digital Trail</h3><p>A mobile device is recovered during an investigation and may contain relevant digital information.</p><details><summary>Explore investigation approach</summary><p>Document the device and its condition, preserve it using appropriate procedures, record authorized handling and examine relevant data while maintaining evidence integrity.</p></details></div>
+</div>
+</div>
 </section>
 
-<footer>Forensic Lab Hub · Interactive Learning Platform</footer>
+<section id="learning">
+<div class="container">
+<div class="section-head">
+<div class="eyebrow">LEARNING ZONE</div>
+<h2>Core forensic principles.</h2>
+<p>Fundamental concepts that guide reliable forensic examination.</p>
+</div>
+<div class="learning-list">
+<div class="learning-item"><div class="emoji">⚖️</div><div><h3>Locard's Exchange Principle</h3><p>Contact between people, objects or environments may result in a transfer of material.</p></div></div>
+<div class="learning-item"><div class="emoji">🧤</div><div><h3>Evidence Preservation</h3><p>Careful collection, packaging, storage and documentation help protect evidence from contamination or loss.</p></div></div>
+<div class="learning-item"><div class="emoji">📋</div><div><h3>Chain of Custody</h3><p>A continuous record documents who collected, handled, transferred and stored evidence.</p></div></div>
+<div class="learning-item"><div class="emoji">🔬</div><div><h3>Scientific Method</h3><p>Observations, testing, analysis and conclusions should be systematic, transparent and supported by results.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="about" id="assessment">
+<div class="container">
+<div class="section-head">
+<div class="eyebrow">KNOWLEDGE CHECK</div>
+<h2>Forensic science assessment.</h2>
+<p>Answer all questions and submit to calculate your score.</p>
+</div>
+<div class="quiz"><div id="questions"></div><button class="btn" onclick="submitQuiz()">Submit Assessment</button><button class="btn outline" onclick="resetQuiz()">Try Again</button><div class="result" id="result"></div></div>
+</div>
+</section>
+</main>
+
+<footer><div class="container"><div class="logo">🔬 Forensic<span>Lab</span>Hub</div><p>Interactive forensic science learning project</p><p style="margin-top:8px">SCIENCE · EVIDENCE · DISCOVERY</p></div></footer>
 
 <script>
-const quizData = [
- {q:"What is the primary purpose of preserving a crime scene?",o:["To make the scene look organized","To prevent contamination or loss of evidence","To allow visitors inside","To remove evidence quickly"],a:1},
- {q:"Which pattern is commonly studied in fingerprint examination?",o:["Ridge patterns","Hair color","Eye shape","Height"],a:0},
- {q:"What does DNA stand for?",o:["Digital Network Analysis","Deoxyribonucleic Acid","Dynamic Natural Arrangement","Data Numeric Analysis"],a:1},
- {q:"What is chain of custody?",o:["A list of suspects","A record of evidence handling and transfers","A crime scene map","A laboratory instrument"],a:1},
- {q:"What is an important first step when collecting evidence?",o:["Touch it directly","Document and properly preserve it","Mix it with other samples","Discard its packaging"],a:1}
+const quiz=[
+{q:"What is the main purpose of forensic science?",o:["To entertain people","To scientifically examine evidence","To make laws","To punish suspects"],a:1},
+{q:"Which branch examines genetic material?",o:["Ballistics","Document examination","DNA forensics","Digital forensics"],a:2},
+{q:"What is the chain of custody?",o:["A suspect list","A record of evidence handling and transfers","A lab machine","A fingerprint pattern"],a:1},
+{q:"Why is evidence preservation important?",o:["To change evidence","To prevent contamination or loss","To hide samples","To avoid documentation"],a:1},
+{q:"Which branch examines electronic devices for evidence?",o:["Toxicology","Digital forensics","Anthropology","Ballistics"],a:1}
 ];
-
+const qContainer=document.getElementById("questions");
 function renderQuiz(){
- const container=document.getElementById("quizQuestions");
- container.innerHTML=quizData.map((q,i)=>`
-  <div class="question">
-   <p>${i+1}. ${q.q}</p>
-   ${q.o.map((option,j)=>`
-    <label><input type="radio" name="q${i}" value="${j}"> ${option}</label>
-   `).join("")}
-  </div>
- `).join("");
+qContainer.innerHTML=quiz.map((item,i)=>`<div class="question"><h3>${i+1}. ${item.q}</h3>${item.o.map((opt,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>`).join("")}</div>`).join("");
 }
-function checkQuiz(){
- let score=0,answered=0;
- quizData.forEach((q,i)=>{
-  const selected=document.querySelector('input[name="q'+i+'"]:checked');
-  if(selected){
-   answered++;
-   if(Number(selected.value)===q.a)score++;
-  }
- });
- const result=document.getElementById("result");
- if(answered<quizData.length){
-  result.textContent="Please answer all "+quizData.length+" questions first. ("+answered+"/"+quizData.length+" answered)";
-  return;
- }
- result.innerHTML="Assessment Complete! Your Score: "+score+"/"+quizData.length+" ("+Math.round(score/quizData.length*100)+"%)";
+function submitQuiz(){
+let score=0,answered=0;
+quiz.forEach((q,i)=>{let selected=document.querySelector('input[name="q'+i+'"]:checked');if(selected){answered++;if(Number(selected.value)===q.a)score++;}});
+const result=document.getElementById("result");
+result.style.display="block";
+if(answered<quiz.length){result.textContent=`Please answer all questions. You have answered ${answered} of ${quiz.length}.`;return;}
+const percent=Math.round(score/quiz.length*100);
+result.innerHTML=`Assessment completed!<br>Your score: ${score}/${quiz.length} (${percent}%)<br>${percent===100?"Excellent work!":"Keep learning and try again!"}`;
+result.scrollIntoView({behavior:"smooth",block:"center"});
 }
+function resetQuiz(){renderQuiz();const result=document.getElementById("result");result.style.display="none";result.textContent="";}
 renderQuiz();
-
-// Attempt to load discipline content from the API if available.
-fetch("/api/disciplines")
-.then(response=>response.ok?response.json():null)
-.then(data=>{
- if(!data || !Array.isArray(data.data) || !data.data.length)return;
- const grid=document.getElementById("disciplineGrid");
- grid.innerHTML=data.data.map(item=>`
-  <div class="card">
-   <span class="tag">FORENSIC DISCIPLINE</span>
-   <h3>${item.name||item.title||"Discipline"}</h3>
-   <p>${item.description||"Explore this forensic science discipline."}</p>
-  </div>
- `).join("");
-})
-.catch(()=>{});
 </script>
 </body>
 </html>
