@@ -242,5 +242,482 @@ result.scrollIntoView({behavior:"smooth",block:"center"});
 function resetQuiz(){renderQuiz();const result=document.getElementById("result");result.style.display="none";result.textContent="";}
 renderQuiz();
 </script>
-</body>
+<!-- FORENSIC CASE SIMULATOR -->
+<section id="case-simulator" class="flh-section">
+  <style>
+    #case-simulator {
+      --accent: #a78bfa;
+      --bg: #0b0e16;
+      --card: #151a27;
+      --text: #eef0f6;
+      --muted: #9ba4b8;
+      background: var(--bg);
+      color: var(--text);
+      padding: 70px 6%;
+      font-family: inherit;
+    }
+
+    #case-simulator * { box-sizing: border-box; }
+
+    #case-simulator .flh-header {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    #case-simulator .flh-tag {
+      color: var(--accent);
+      letter-spacing: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    #case-simulator h2 {
+      font-size: clamp(30px, 5vw, 48px);
+      margin: 15px 0;
+    }
+
+    #case-simulator p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    #case-simulator .flh-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    #case-simulator .flh-card {
+      background: var(--card);
+      border: 1px solid #293145;
+      padding: 24px;
+      border-radius: 18px;
+      transition: .25s;
+    }
+
+    #case-simulator .flh-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    #case-simulator .flh-card h3 {
+      margin-top: 0;
+    }
+
+    #case-simulator .flh-btn {
+      background: #8b78e6;
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    #case-simulator .flh-btn:hover {
+      background: #a594ff;
+    }
+
+    #case-simulator .flh-evidence {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    #case-simulator .flh-evidence button {
+      flex: 1 1 130px;
+      min-height: 70px;
+      background: #20283a;
+      color: white;
+      border: 1px solid #343f58;
+      border-radius: 12px;
+      padding: 12px;
+      cursor: pointer;
+    }
+
+    #case-simulator .flh-evidence button:hover,
+    #case-simulator .flh-evidence button.active {
+      border-color: var(--accent);
+      background: #292b43;
+    }
+
+    #case-simulator .flh-panel {
+      background: #111724;
+      border: 1px solid #293145;
+      border-radius: 16px;
+      padding: 22px;
+      margin-top: 20px;
+    }
+
+    #case-simulator .flh-suspect {
+      cursor: pointer;
+      border: 1px solid #30394c;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 10px 0;
+      background: #171e2c;
+    }
+
+    #case-simulator .flh-suspect.selected {
+      border-color: var(--accent);
+      background: #27263b;
+    }
+
+    #case-simulator .flh-result {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #20283a;
+    }
+
+    #case-simulator .flh-progress {
+      height: 8px;
+      background: #252c3c;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+
+    #case-simulator .flh-progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+      transition: .4s;
+    }
+
+    #case-simulator .flh-muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    #case-simulator .flh-score {
+      color: var(--accent);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #case-simulator .flh-divider {
+      border: none;
+      border-top: 1px solid #293145;
+      margin: 25px 0;
+    }
+
+    @media(max-width:600px) {
+      #case-simulator { padding: 45px 5%; }
+      #case-simulator .flh-card { padding: 18px; }
+    }
+  </style>
+
+  <div class="flh-header">
+    <span class="flh-tag">Interactive Investigation Experience</span>
+    <h2>Enter the Crime Scene</h2>
+    <p>Observe the evidence. Question the suspects. Discover the truth.</p>
+  </div>
+
+  <div class="flh-grid">
+
+    <div class="flh-card">
+      <span class="flh-tag">CASE 001</span>
+      <h3>The Missing Prototype</h3>
+      <p>
+        A prototype device disappeared from a research laboratory
+        between 8:00 PM and 9:00 PM. Four people had access
+        to the building. Your job is to investigate the evidence
+        and identify who took it.
+      </p>
+      <p><strong>Difficulty:</strong> Intermediate</p>
+      <p><strong>Evidence:</strong> 4 items</p>
+      <p><strong>Suspects:</strong> 3</p>
+      <button class="flh-btn" onclick="FLH.startCase()">
+        Start Investigation
+      </button>
+    </div>
+
+    <div class="flh-card">
+      <span class="flh-tag">YOUR MISSION</span>
+      <h3>Think Like an Investigator</h3>
+      <p>Collect information carefully. Do not jump to conclusions based on one clue. Use timelines, statements, and physical evidence to build your case.</p>
+      <ul>
+        <li>Analyze evidence</li>
+        <li>Compare witness statements</li>
+        <li>Identify inconsistencies</li>
+        <li>Submit your final conclusion</li>
+      </ul>
+    </div>
+
+    <div class="flh-card">
+      <span class="flh-tag">INVESTIGATOR STATS</span>
+      <h3>Your Performance</h3>
+      <p>Cases solved: <strong id="flh-solved">0</strong></p>
+      <p>Investigation score: <strong id="flh-total-score">0</strong></p>
+      <p>Rank: <strong id="flh-rank">Novice Investigator</strong></p>
+      <div class="flh-progress">
+        <span id="flh-progress-bar"></span>
+      </div>
+      <p class="flh-muted">Your score updates as you investigate.</p>
+    </div>
+
+  </div>
+
+  <div id="flh-investigation" class="flh-panel" style="display:none">
+
+    <h3>Case File #001 — The Missing Prototype</h3>
+    <p class="flh-muted">Read each evidence report carefully before making a decision.</p>
+
+    <hr class="flh-divider">
+
+    <h3>Evidence Locker</h3>
+    <p>Click each evidence item to examine it.</p>
+
+    <div class="flh-evidence">
+      <button onclick="FLH.inspect('fingerprint',this)">🧬 Fingerprint Report</button>
+      <button onclick="FLH.inspect('cctv',this)">📹 CCTV Footage</button>
+      <button onclick="FLH.inspect('witness',this)">🗣 Witness Statement</button>
+      <button onclick="FLH.inspect('access',this)">🔐 Access Log</button>
+    </div>
+
+    <div id="flh-evidence-report" class="flh-panel">
+      <p class="flh-muted">Evidence report will appear here.</p>
+    </div>
+
+    <hr class="flh-divider">
+
+    <h3>Suspect Profiles</h3>
+
+    <div class="flh-suspect" onclick="FLH.selectSuspect('alex',this)">
+      <strong>Suspect A — Alex Morgan</strong>
+      <p>Research assistant. Claims to have left at 8:15 PM.</p>
+    </div>
+
+    <div class="flh-suspect" onclick="FLH.selectSuspect('mia',this)">
+      <strong>Suspect B — Mia Carter</strong>
+      <p>Lab technician. Claims she was working in another laboratory.</p>
+    </div>
+
+    <div class="flh-suspect" onclick="FLH.selectSuspect('daniel',this)">
+      <strong>Suspect C — Daniel Reed</strong>
+      <p>Security intern. Had access to the building's security system.</p>
+    </div>
+
+    <p id="flh-selection-status" class="flh-muted">
+      Select the suspect you believe is responsible.
+    </p>
+
+    <button class="flh-btn" onclick="FLH.submitVerdict()">
+      Submit Final Verdict
+    </button>
+
+    <button class="flh-btn" onclick="FLH.resetCase()" style="background:#333b4d">
+      Reset Investigation
+    </button>
+
+    <div id="flh-verdict" class="flh-result"></div>
+
+  </div>
+
+  <script>
+    const FLH = (() => {
+
+      let selected = null;
+      let examined = new Set();
+      let completed = false;
+      let score = 0;
+
+      const evidence = {
+
+        fingerprint: {
+          title: "Fingerprint Report",
+          text: "A partial fingerprint recovered from the prototype's storage case matches the laboratory records of Alex Morgan. The print confirms contact with the case, but does not establish when the contact occurred."
+        },
+
+        cctv: {
+          title: "CCTV Footage",
+          text: "Footage shows a person entering the prototype room at 8:42 PM. The face is not clearly visible. The person appears to be carrying a small rectangular object while leaving at 8:49 PM."
+        },
+
+        witness: {
+          title: "Witness Statement",
+          text: "A laboratory employee reports hearing the storage cabinet close at approximately 8:45 PM. The witness did not see who was inside the room."
+        },
+
+        access: {
+          title: "Access Log",
+          text: "The electronic access log records Alex Morgan's card being used at 8:41 PM. The card was reported missing the following morning. Card usage alone does not prove who used it."
+        }
+
+      };
+
+      function startCase() {
+        const panel = document.getElementById("flh-investigation");
+        panel.style.display = "block";
+        panel.scrollIntoView({behavior:"smooth"});
+      }
+
+      function inspect(key,button) {
+        examined.add(key);
+
+        document.querySelectorAll("#case-simulator .flh-evidence button")
+          .forEach(b => b.classList.remove("active"));
+
+        button.classList.add("active");
+
+        const item = evidence[key];
+
+        document.getElementById("flh-evidence-report").innerHTML =
+          "<h3>" + item.title + "</h3><p>" + item.text + "</p>";
+
+        updateProgress();
+      }
+
+      function selectSuspect(id,element) {
+        selected = id;
+
+        document.querySelectorAll("#case-simulator .flh-suspect")
+          .forEach(s => s.classList.remove("selected"));
+
+        element.classList.add("selected");
+
+        const names = {
+          alex:"Alex Morgan",
+          mia:"Mia Carter",
+          daniel:"Daniel Reed"
+        };
+
+        document.getElementById("flh-selection-status").innerText =
+          "Selected suspect: " + names[id];
+
+        updateProgress();
+      }
+
+      function submitVerdict() {
+
+        if(completed) {
+          alert("You have already completed this case. Reset to try again.");
+          return;
+        }
+
+        if(examined.size < 4) {
+          alert("Investigate all four evidence items before submitting your verdict.");
+          return;
+        }
+
+        if(!selected) {
+          alert("Please select a suspect first.");
+          return;
+        }
+
+        completed = true;
+
+        const box = document.getElementById("flh-verdict");
+        box.style.display = "block";
+
+        if(selected === "alex") {
+          score = 100;
+
+          box.innerHTML = `
+            <h3>🔍 Investigation Complete</h3>
+            <h2>Correct Identification!</h2>
+            <p>Alex Morgan is the most strongly supported suspect
+            based on the available evidence.</p>
+            <p>The fingerprint and access log connect Alex to the
+            storage case and room access. However, the missing access
+            card creates uncertainty about who actually used it.</p>
+            <p><strong>Important:</strong> Evidence supports a hypothesis.
+            It does not automatically establish guilt beyond doubt.</p>
+            <p class="flh-score">Score: +100 XP</p>
+          `;
+        } else {
+          score = 25;
+
+          box.innerHTML = `
+            <h3>🔍 Investigation Complete</h3>
+            <h2>Verdict Not Supported</h2>
+            <p>Your selected suspect does not have the strongest
+            connection to the available evidence.</p>
+            <p>Review the fingerprint report and access log.
+            Consider the difference between a person being connected
+            to evidence and evidence proving their involvement.</p>
+            <p class="flh-score">Score: +25 XP for completing the investigation</p>
+          `;
+        }
+
+        const previousSolved = Number(localStorage.getItem("flhSolved") || 0);
+        const previousScore = Number(localStorage.getItem("flhScore") || 0);
+
+        localStorage.setItem("flhSolved", previousSolved + 1);
+        localStorage.setItem("flhScore", previousScore + score);
+
+        updateStats();
+
+        box.scrollIntoView({behavior:"smooth",block:"center"});
+      }
+
+      function updateProgress() {
+        let progress = (examined.size / 4) * 75;
+
+        if(selected) progress += 25;
+
+        document.getElementById("flh-progress-bar").style.width =
+          progress + "%";
+      }
+
+      function updateStats() {
+        const solved = Number(localStorage.getItem("flhSolved") || 0);
+        const total = Number(localStorage.getItem("flhScore") || 0);
+
+        document.getElementById("flh-solved").innerText = solved;
+        document.getElementById("flh-total-score").innerText = total;
+
+        let rank = "Novice Investigator";
+
+        if(total >= 100) rank = "Junior Detective";
+        if(total >= 300) rank = "Crime Analyst";
+        if(total >= 600) rank = "Senior Investigator";
+        if(total >= 1000) rank = "Master Forensic Analyst";
+
+        document.getElementById("flh-rank").innerText = rank;
+      }
+
+      function resetCase() {
+        selected = null;
+        examined.clear();
+        completed = false;
+        score = 0;
+
+        document.querySelectorAll("#case-simulator .flh-evidence button")
+          .forEach(b => b.classList.remove("active"));
+
+        document.querySelectorAll("#case-simulator .flh-suspect")
+          .forEach(s => s.classList.remove("selected"));
+
+        document.getElementById("flh-evidence-report").innerHTML =
+          "<p class='flh-muted'>Evidence report will appear here.</p>";
+
+        document.getElementById("flh-selection-status").innerText =
+          "Select the suspect you believe is responsible.";
+
+        document.getElementById("flh-verdict").style.display = "none";
+
+        updateProgress();
+      }
+
+      updateStats();
+
+      return {
+        startCase,
+        inspect,
+        selectSuspect,
+        submitVerdict,
+        resetCase
+      };
+
+    })();
+  </script>
+
+</section>
+<!-- END FORENSIC CASE SIMULATOR --></body>
 </html>
