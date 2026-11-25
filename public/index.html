@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forensic Lab Hub</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#0b1120;color:#e8edf7}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263246;background:#0e1729}
+.logo{font-size:22px;font-weight:bold;color:#62e6c5}
+nav a{color:#cbd5e1;text-decoration:none;margin-left:20px;font-size:14px}
+.hero{padding:80px 7%;background:linear-gradient(120deg,#111c30,#152b3b)}
+.hero small{color:#62e6c5;letter-spacing:3px}
+.hero h1{font-size:48px;margin:18px 0}
+.hero p{color:#aab7cc;max-width:600px;line-height:1.7}
+.btn{display:inline-block;background:#62e6c5;color:#07121b;padding:13px 20px;border:0;border-radius:7px;font-weight:bold;text-decoration:none;cursor:pointer;margin-top:22px}
+section{padding:55px 7%}
+h2{font-size:28px;margin-bottom:12px}
+.sub{color:#9cabc2;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#141e30;border:1px solid #27364b;border-radius:12px;padding:22px}
+.card h3{color:#62e6c5;margin-bottom:12px}
+.card p{color:#aab7cc;line-height:1.6;font-size:14px}
+.tag{font-size:12px;color:#62e6c5;margin-bottom:12px;display:block}
+#cases .card{border-left:3px solid #62e6c5}
+.quizbox{background:#141e30;border:1px solid #27364b;border-radius:12px;padding:25px}
+.question{margin:20px 0;padding-bottom:18px;border-bottom:1px solid #27364b}
+.question p{margin-bottom:12px;font-weight:bold}
+.question label{display:block;padding:9px;color:#b8c5d8;cursor:pointer}
+.question input{margin-right:8px}
+#result{margin-top:20px;color:#62e6c5;font-weight:bold;font-size:18px}
+footer{text-align:center;padding:30px;border-top:1px solid #263246;color:#8090a8}
+input[type=text]{padding:12px;border-radius:7px;border:1px solid #33445b;background:#0b1120;color:white;width:100%;max-width:450px;margin:15px 0}
+@media(max-width:600px){.hero h1{font-size:34px}nav a{margin-left:8px;font-size:12px}header{padding:18px 4%}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🔬 Forensic Lab Hub</div>
+  <nav>
+    <a href="#disciplines">Labs</a>
+    <a href="#cases">Cases</a>
+    <a href="#quiz">Assessment</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <small>LEARN • ANALYZE • INVESTIGATE</small>
+  <h1>Explore the Science<br>Behind Every Evidence.</h1>
+  <p>An interactive forensic science learning platform. Explore forensic disciplines, understand crime scene evidence and test your investigative knowledge.</p>
+  <a class="btn" href="#disciplines">Explore the Lab →</a>
+</div>
+
+<section id="disciplines">
+  <h2>Forensic Disciplines</h2>
+  <p class="sub">Explore the different branches of forensic science.</p>
+  <div class="grid" id="disciplineGrid">
+    <div class="card"><span class="tag">01 • EVIDENCE</span><h3>Fingerprint Analysis</h3><p>Study fingerprint patterns, ridge characteristics and identification techniques.</p></div>
+    <div class="card"><span class="tag">02 • BIOLOGY</span><h3>Forensic DNA</h3><p>Learn how biological samples and DNA profiling help investigations.</p></div>
+    <div class="card"><span class="tag">03 • TOXICOLOGY</span><h3>Toxicology</h3><p>Understand the detection of drugs, chemicals and toxins in biological samples.</p></div>
+    <div class="card"><span class="tag">04 • DIGITAL</span><h3>Digital Forensics</h3><p>Explore digital evidence from computers, mobile devices and networks.</p></div>
+    <div class="card"><span class="tag">05 • DOCUMENTS</span><h3>Questioned Documents</h3><p>Examine handwriting, signatures, ink and document authenticity.</p></div>
+    <div class="card"><span class="tag">06 • CRIME SCENE</span><h3>Crime Scene Investigation</h3><p>Learn evidence collection, preservation, documentation and scene analysis.</p></div>
+  </div>
+</section>
+
+<section id="cases">
+  <h2>Case Study Corner</h2>
+  <p class="sub">Think critically. Examine the evidence. Reach a conclusion.</p>
+  <div class="grid">
+    <div class="card"><span class="tag">CASE 001</span><h3>The Broken Window</h3><p>A burglary scene has a broken window and partial fingerprints on the glass. Investigators must evaluate the prints and the scene carefully before drawing conclusions.</p></div>
+    <div class="card"><span class="tag">CASE 002</span><h3>Unknown Substance</h3><p>A suspicious powder is recovered. The forensic team must document, secure and submit the sample for laboratory examination.</p></div>
+    <div class="card"><span class="tag">CASE 003</span><h3>Digital Trail</h3><p>A device is recovered during an investigation. Digital forensic procedures are used to preserve and examine potential evidence.</p></div>
+  </div>
+</section>
+
+<section id="quiz">
+  <h2>Knowledge Assessment</h2>
+  <p class="sub">Answer all questions and check your score.</p>
+  <div class="quizbox">
+    <div id="quizQuestions"></div>
+    <button class="btn" onclick="checkQuiz()">Submit Assessment</button>
+    <div id="result"></div>
+  </div>
+</section>
+
+<footer>Forensic Lab Hub · Interactive Learning Platform</footer>
+
+<script>
+const quizData = [
+ {q:"What is the primary purpose of preserving a crime scene?",o:["To make the scene look organized","To prevent contamination or loss of evidence","To allow visitors inside","To remove evidence quickly"],a:1},
+ {q:"Which pattern is commonly studied in fingerprint examination?",o:["Ridge patterns","Hair color","Eye shape","Height"],a:0},
+ {q:"What does DNA stand for?",o:["Digital Network Analysis","Deoxyribonucleic Acid","Dynamic Natural Arrangement","Data Numeric Analysis"],a:1},
+ {q:"What is chain of custody?",o:["A list of suspects","A record of evidence handling and transfers","A crime scene map","A laboratory instrument"],a:1},
+ {q:"What is an important first step when collecting evidence?",o:["Touch it directly","Document and properly preserve it","Mix it with other samples","Discard its packaging"],a:1}
+];
+
+function renderQuiz(){
+ const container=document.getElementById("quizQuestions");
+ container.innerHTML=quizData.map((q,i)=>`
+  <div class="question">
+   <p>${i+1}. ${q.q}</p>
+   ${q.o.map((option,j)=>`
+    <label><input type="radio" name="q${i}" value="${j}"> ${option}</label>
+   `).join("")}
+  </div>
+ `).join("");
+}
+function checkQuiz(){
+ let score=0,answered=0;
+ quizData.forEach((q,i)=>{
+  const selected=document.querySelector('input[name="q'+i+'"]:checked');
+  if(selected){
+   answered++;
+   if(Number(selected.value)===q.a)score++;
+  }
+ });
+ const result=document.getElementById("result");
+ if(answered<quizData.length){
+  result.textContent="Please answer all "+quizData.length+" questions first. ("+answered+"/"+quizData.length+" answered)";
+  return;
+ }
+ result.innerHTML="Assessment Complete! Your Score: "+score+"/"+quizData.length+" ("+Math.round(score/quizData.length*100)+"%)";
+}
+renderQuiz();
+
+// Attempt to load discipline content from the API if available.
+fetch("/api/disciplines")
+.then(response=>response.ok?response.json():null)
+.then(data=>{
+ if(!data || !Array.isArray(data.data) || !data.data.length)return;
+ const grid=document.getElementById("disciplineGrid");
+ grid.innerHTML=data.data.map(item=>`
+  <div class="card">
+   <span class="tag">FORENSIC DISCIPLINE</span>
+   <h3>${item.name||item.title||"Discipline"}</h3>
+   <p>${item.description||"Explore this forensic science discipline."}</p>
+  </div>
+ `).join("");
+})
+.catch(()=>{});
+</script>
+</body>
+</html>
